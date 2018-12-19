@@ -1,0 +1,15 @@
+{
+  "name": "visa-api",
+  "version": "1.0.0",
+  "description": "API for connecting to DB containing visa information for every nationality. ",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./index.js"
+  },
+  "author": "Madhava Di Florio <mattdiflorio@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.4",
+    "sqlite3": "^4.0.4"
+  }
+}
