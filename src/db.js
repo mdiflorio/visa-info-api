@@ -8,11 +8,12 @@ WHERE NOT EXISTS(
 )`;
 
 const mysql = require("mysql");
+require("dotenv").config();
 
 const con = mysql.createConnection({
-  host: "den1.mysql4.gear.host",
-  user: "visainfo",
-  password: "Nb10_ri~P8og",
+  host: process.env.DB_host,
+  user: process.env.DB_user,
+  password: process.env.DB_pass,
   database: "visainfo"
 });
 
