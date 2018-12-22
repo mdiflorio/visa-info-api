@@ -1,5 +1,25 @@
 const db = require("../helpers/db");
 
+function getNationalities() {
+  const sqlQuery = `
+  SELECT nationality 
+  FROM nationalities`;
+
+  const getInfoPromise = new Promise((resolve, reject) => {
+    db.query(sqlQuery, (error, info) => {
+      if (error) reject(error);
+      let infoWithoutColumn = [];
+      // Remove column name from list
+      for (let i = 0; i < info.length; i++) {
+        infoWithoutColumn.push(info[i].nationality);
+      }
+      resolve(infoWithoutColumn);
+    });
+  });
+
+  return getInfoPromise;
+}
+
 function getByNationality(nationality = "") {
   const sqlQuery = `
   SELECT country, visatype, duration, note 
@@ -34,6 +54,7 @@ async function getByNatAndCountry(nationality = "", country = "") {
 }
 
 module.exports = {
+  getNationalities,
   getByNationality,
   getByNatAndCountry
 };

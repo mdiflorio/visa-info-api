@@ -3,9 +3,32 @@ const router = express.Router();
 const visaInfoService = require("./visaInfo.service");
 const queryDB = require("../helpers/db");
 
-// routes
+// Routes
+router.get("/", getNationalities);
 router.get("/:nationality", getByNationality);
 router.get("/:nationality/:country", getByNatAndCountry);
+
+// Get a list of nationalities available in DB.
+function getNationalities(req, res, next) {
+  visaInfoService
+    .getNationalities()
+    .then(info => {
+      // Check if info exists and db didn't return []
+      if (info && info.length !== 0) {
+        res.send({
+          status: 200,
+          nationality_list: info
+        });
+      } else {
+        // Handle error
+        next({
+          name: "Not Found",
+          message: `List of nationalities was not found`
+        });
+      }
+    })
+    .catch(err => next(err));
+}
 
 // Get all visa info associated to a nationality
 function getByNationality(req, res, next) {
