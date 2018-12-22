@@ -1,5 +1,3 @@
-// require("rootpath")();
-
 const express = require("express");
 const cors = require("cors");
 const errorHandler = require("./helpers/error-handlers");
@@ -10,15 +8,18 @@ const app = express();
 
 app.use(cors());
 
+// Routes
 app.use("/", VisaInfoController);
 
-// global error handler
+// Global error handler
 app.use(errorHandler);
 
+// Connect to MySQL DB
 db.connect(error => {
   if (error) throw error;
   console.log("MySQL database connected");
 });
+
 //Start server
 const port = process.env.PORT || 4000;
 const server = app.listen(port, function() {
