@@ -4,7 +4,8 @@
   "description": "API for connecting to DB containing visa information for every nationality. ",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon ./src/server.js"
+    "start": "node ./src/server.js",
+    "test": "nodemon ./src/server.js"
   },
   "author": "Madhava Di Florio <mattdiflorio@gmail.com>",
   "license": "MIT",
