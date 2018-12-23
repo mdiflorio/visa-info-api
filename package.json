@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node ./src/server.js",
-    "test": "nodemon ./src/server.js"
+    "dev": "nodemon ./src/server.js"
   },
   "author": "Madhava Di Florio <mattdiflorio@gmail.com>",
   "license": "MIT",
