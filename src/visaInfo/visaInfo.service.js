@@ -1,4 +1,4 @@
-const db = require("../helpers/db");
+const pool = require("../helpers/db");
 
 function getNationalities() {
   const sqlQuery = `
@@ -6,7 +6,7 @@ function getNationalities() {
   FROM nationalities`;
 
   const getInfoPromise = new Promise((resolve, reject) => {
-    db.query(sqlQuery, (error, info) => {
+    pool.query(sqlQuery, (error, info) => {
       if (error) reject(error);
       let infoWithoutColumn = [];
       // Remove column name from list
@@ -27,7 +27,7 @@ function getByNationality(nationality = "") {
   WHERE nationality = '${nationality}'`;
 
   const getInfoPromise = new Promise((resolve, reject) => {
-    db.query(sqlQuery, (error, info) => {
+    pool.query(sqlQuery, (error, info) => {
       if (error) reject(error);
       resolve(info);
     });
@@ -44,7 +44,7 @@ async function getByNatAndCountry(nationality = "", country = "") {
     AND country = '${country}'`;
 
   const getInfoPromise = new Promise((resolve, reject) => {
-    db.query(sqlQuery, (error, info) => {
+    pool.query(sqlQuery, (error, info) => {
       if (error) reject(error);
       resolve(info);
     });

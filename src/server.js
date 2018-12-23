@@ -1,7 +1,6 @@
 const express = require("express");
 const cors = require("cors");
 const errorHandler = require("./helpers/error-handlers");
-const db = require("./helpers/db");
 const VisaInfoController = require("./visaInfo/visaInfo.controller");
 
 const app = express();
@@ -13,12 +12,6 @@ app.use("/", VisaInfoController);
 
 // Global error handler
 app.use(errorHandler);
-
-// Connect to MySQL DB
-db.connect(error => {
-  if (error) throw error;
-  console.log("MySQL database connected");
-});
 
 //Start server
 const port = process.env.PORT || 4000;
