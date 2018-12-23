@@ -4,9 +4,9 @@ const visaInfoService = require("./visaInfo.service");
 const queryDB = require("../helpers/db");
 
 // Routes
-router.get("/", getNationalities);
-router.get("/:nationality", getByNationality);
-router.get("/:nationality/:country", getByNatAndCountry);
+router.get("/nationalities", getNationalities);
+router.get("/restrictions/:nationality", getByNationality);
+router.get("/restrictions/:nationality/:country", getByNatAndCountry);
 
 // Get a list of nationalities available in DB.
 function getNationalities(req, res, next) {
