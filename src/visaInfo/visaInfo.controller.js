@@ -34,14 +34,15 @@ function getNationalities(req, res, next) {
 function getByNationality(req, res, next) {
   visaInfoService
     .getByNationality(req.params.nationality)
-    .then(info => {
+    .then(data => {
       // Check if info exists and db didn't return []
-      if (info && info.length !== 0) {
+      if (data.info && data.info.length !== 0) {
         res.send({
           status: 200,
           data: {
             nationality: req.params.nationality,
-            countries: info
+            statistics: data.stats,
+            countries: data.info
           }
         });
       } else {

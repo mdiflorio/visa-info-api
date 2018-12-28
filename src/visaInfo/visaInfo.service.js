@@ -26,10 +26,21 @@ function getByNationality(nationality = "") {
   FROM restrictions 
   WHERE nationality = '${nationality}'`;
 
+  const sqlStats = `
+  SELECT visaType, COUNT(*) as count 
+  FROM restrictions 
+  WHERE nationality = '${nationality}'  
+  GROUP BY \`visaType\`  
+  ORDER BY count DESC
+  `;
+
   const getInfoPromise = new Promise((resolve, reject) => {
     pool.query(sqlQuery, (error, info) => {
       if (error) reject(error);
-      resolve(info);
+      pool.query(sqlStats, (error, stats) => {
+        if (error) reject(error);
+        resolve({ info, stats });
+      });
     });
   });
 
