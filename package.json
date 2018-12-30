@@ -1,7 +1,7 @@
 {
   "name": "visa-api",
   "version": "1.0.0",
-  "description": "API for connecting to DB containing visa information for every nationality. ",
+  "description": "API for connecting to DB containing visa information for every nationality.",
   "main": "index.js",
   "scripts": {
     "start": "node ./src/server.js",

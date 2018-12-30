@@ -4,9 +4,32 @@ const visaInfoService = require("./visaInfo.service");
 const queryDB = require("../helpers/db");
 
 // Routes
+router.get("/statistics", getStatistics);
 router.get("/nationalities", getNationalities);
 router.get("/restrictions/:nationality", getByNationality);
 router.get("/restrictions/:nationality/:country", getByNatAndCountry);
+
+// Get a list of nationalities available in DB.
+function getStatistics(req, res, next) {
+  visaInfoService
+    .getStatistics()
+    .then(info => {
+      // Check if info exists and db didn't return []
+      if (info && info.length !== 0) {
+        res.send({
+          status: 200,
+          statistics: info
+        });
+      } else {
+        // Handle error
+        next({
+          name: "Not Found",
+          message: `Unable to get statistics on restrictions`
+        });
+      }
+    })
+    .catch(err => next(err));
+}
 
 // Get a list of nationalities available in DB.
 function getNationalities(req, res, next) {
